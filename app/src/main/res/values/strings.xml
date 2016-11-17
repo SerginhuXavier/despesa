@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Despesas</string>
+    <string name="action_settings">Settings</string>
+
+    #Formularios
+    <string name="txt_nomeDespesa">Descriçao</string>
+    <string name="txt_valorDespesa">Valor</string>
+    <string name="btn_cadastrarDespesa">Salvar</string>
+    <string name="txt_recorrente">Recorrente?</string>
+
+</resources>
