@@ -7,31 +7,43 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class cad_despesa extends AppCompatActivity {
 
-boolean recorrente = false;
+    boolean recorrente = false;
+    private CheckBox chkRecorrente;
+    private EditText txtValor;
+    private EditText txtDescricao;
+    private Button btnSalvar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Button btnSalvar = (Button) findViewById(R.id.btn_cadastrarDespesa);
+        btnSalvar = (Button) findViewById(R.id.btn_cadastrarDespesa);
         setContentView(R.layout.activity_cad_despesa);
 
-        EditText txtDescricao = (EditText) findViewById(R.id.txt_nomeDespesa);
-        EditText txtValor = (EditText) findViewById(R.id.txt_nomeDespesa);
-        CheckBox chkRecorrente = (CheckBox) findViewById(R.id.txt_recorrente);
+        txtDescricao = (EditText) findViewById(R.id.txt_nomeDespesa);
+        txtValor = (EditText) findViewById(R.id.txt_nomeDespesa);
+        chkRecorrente = (CheckBox) findViewById(R.id.txt_recorrente);
 
         chkRecorrente.setOnCheckedChangeListener(new CheckBox.OnCheckedChangeListener(){
             public void onCheckedChanged(CompoundButton b, boolean isChecked){
-
+                recorrente = isChecked;
             }
         });
 
-        btnSalvar.setOnClickListener(this);
     }
 
-    public void onClick(View v){
+    public void salvarDespesa(View v){
+        DespesaController crud = new DespesaController(getBaseContext());
+        String resultado;
+        double campoValor = Double.valueOf(txtValor.getText().toString()).doubleValue();
+        String campoDescricao = txtDescricao.getText().toString();
+        int campoRecorrente = (recorrente) ? 1 : 0;
 
+        resultado = crud.inserir(campoValor,campoDescricao,campoRecorrente);
+
+        Toast.makeText(getApplicationContext(), resultado, Toast.LENGTH_LONG).show();
     }
 }

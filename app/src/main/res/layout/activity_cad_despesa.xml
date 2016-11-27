@@ -32,5 +32,6 @@
         android:id="@+id/btn_cadastrarDespesa"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="salvarDespesa"
         android:text="@string/btn_cadastrarDespesa"/>
 </LinearLayout>
