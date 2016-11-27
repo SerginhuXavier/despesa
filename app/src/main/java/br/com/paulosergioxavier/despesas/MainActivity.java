@@ -1,15 +1,19 @@
 package br.com.paulosergioxavier.despesas;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity {
+    private ListView lista;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(it);
             }
         });
+
+        carregaDados();
     }
 
     @Override
@@ -48,5 +54,19 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    protected void carregaDados() {
+        DespesaController crud = new DespesaController(getBaseContext());
+        Cursor cursor = crud.listar();
+        String[] nomeCampos = new String[]{Banco.VALOR, Banco.DESCRICAO};
+        int[] idViews = new int[]{R.id.txtListValor, R.id.txtListDescricao};
+
+        SimpleCursorAdapter adaptador = new SimpleCursorAdapter(getBaseContext(),
+                R.layout.content_main, cursor, nomeCampos, idViews, 0);
+
+        lista = (ListView) findViewById(R.id.listaDespesas);
+        lista.setAdapter(adaptador);
+
     }
 }

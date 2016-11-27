@@ -12,8 +12,36 @@
     tools:context="br.com.paulosergioxavier.despesas.MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <TextView
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:columnCount="2"
+        android:rowCount="2">
+
+        <TextView
+            android:id="@+id/txtListDescricao"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="fill_horizontal"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:text="Descrição" />
+
+        <TextView
+            android:id="@+id/txtListValor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:text="Valor" />
+    </GridLayout>
+
+    <ListView
+        android:id="@+id/listaDespesas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+
 </RelativeLayout>
