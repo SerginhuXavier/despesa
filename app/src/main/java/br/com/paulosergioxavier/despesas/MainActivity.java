@@ -1,8 +1,10 @@
 package br.com.paulosergioxavier.despesas;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +16,7 @@ import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity {
     private ListView lista;
+    private static final int RESULT_SETTINGS = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         carregaDados();
+        showUserSettings();
     }
 
     @Override
@@ -50,10 +54,37 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            Intent it = new Intent(this, Config.class);
+            startActivityForResult(it,RESULT_SETTINGS);
         }
 
-        return super.onOptionsItemSelected(item);
+//        return super.onOptionsItemSelected(item);
+        return true;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode){
+            case RESULT_SETTINGS:
+                showUserSettings();
+                break;
+        }
+    }
+
+    private void showUserSettings() {
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+
+        StringBuilder builder = new StringBuilder();
+
+        builder.append("\n Username: "+ sharedPrefs.getString("prefNome", "NULL"));
+
+        builder.append("\n Send report:"+ sharedPrefs.getBoolean("prefMostraNotficacao", true));
+
+//        TextView settingsTextView = (TextView) findViewById(R.id.textUserSettings);
+
+//        settingsTextView.setText(builder.toString());
     }
 
     protected void carregaDados() {

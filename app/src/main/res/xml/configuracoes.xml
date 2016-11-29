@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="Informações">
+        <EditTextPreference
+            android:key="prefNome"
+            android:title="Nome"
+            android:summary="Digite o seu Nome" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Notificações">
+        <CheckBoxPreference
+            android:key="prefMostraNotficacao"
+            android:title="Receber Notificações"
+            android:summary="Deseja Receber Notificações?"/>
+    </PreferenceCategory>
+</PreferenceScreen>
